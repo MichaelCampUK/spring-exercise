@@ -1,0 +1,36 @@
+{
+  "page_number": 1,
+  "kind": "search#companies",
+  "total_results": 20,
+  "items": [
+    {
+      "company_status": "active",
+      "address_snippet": "Some Address 1",
+      "date_of_creation": "2008-02-11",
+      "matches": {
+        "title": [
+          1,
+          3
+        ]
+      },
+      "description": "Some Number 1 desc",
+      "links": {
+        "self": "/company/SomeNumber1"
+      },
+      "company_number": "SomeNumber1",
+      "title": "SomeCompany1Name",
+      "company_type": "ltd",
+      "address": {
+        "premises": "Some Number 1 premises",
+        "postal_code": "Some Number 1 postcode",
+        "country": "Some Number 1 country",
+        "locality": "Some Number 1 locality",
+        "address_line_1": "Some Number 1 address line"
+      },
+      "kind": "searchresults#company",
+      "description_identifier": [
+        "incorporated-on"
+      ]
+    }
+  ]
+}

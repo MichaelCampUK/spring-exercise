@@ -1,0 +1,83 @@
+{
+  "etag": "6dd2261e61776d79c2c50685145fac364e75e24e",
+  "links": {
+    "self": "/company/10241297/officers"
+  },
+  "kind": "officer-list",
+  "items_per_page": 35,
+  "items": [
+    {
+      "address": {
+        "premises": "Officer 1 premises",
+        "postal_code": "Officer 1 postcode",
+        "country": "Officer 1 country",
+        "locality": "Officer 1 locality",
+        "address_line_1": "Officer 1 address line"
+      },
+      "name": "Officer 1 name",
+      "appointed_on": "2017-04-01",
+      "officer_role": "Officer 1 role",
+      "links": {
+        "officer": {
+          "appointments": "/officers/4R8_9bZ44w0_cRlrxoC-wRwaMiE/appointments"
+        }
+      },
+      "date_of_birth": {
+        "month": 6,
+        "year": 1969
+      },
+      "occupation": "Officer 1 occupation",
+      "country_of_residence": "Officer 1 residence",
+      "nationality": "Officer 1 nationality"
+    },
+    {
+      "address": {
+        "premises": "Officer 2 premises",
+        "postal_code": "Officer 2 postcode",
+        "country": "Officer 2 country",
+        "locality": "Officer 2 locality",
+        "address_line_1": "Officer 2 address line"
+      },
+      "name": "Officer 2 name",
+      "appointed_on": "2018-04-01",
+      "officer_role": "Officer 2 role",
+      "links": {
+        "officer": {
+          "appointments": "/officers/4R8_9bZ44w0_cRlrxoC-wRwaMiE/appointments"
+        }
+      },
+      "date_of_birth": {
+        "month": 6,
+        "year": 1969
+      },
+      "occupation": "Officer 2 occupation",
+      "country_of_residence": "Officer 2 residence",
+      "nationality": "Officer 2 nationality"
+    },
+    {
+      "address": {
+        "premises": "Officer 3 premises",
+        "postal_code": "Officer 3 postcode",
+        "country": "Officer 3 country",
+        "locality": "Officer 3 locality",
+        "address_line_1": "Officer 3 address line"
+      },
+      "name": "Officer 3 name",
+      "appointed_on": "2019-04-01",
+      "resigned_on": "2019-02-12",
+      "officer_role": "Officer 3 role",
+      "links": {
+        "officer": {
+          "appointments": "/officers/4R8_9bZ44w0_cRlrxoC-wRwaMiE/appointments"
+        }
+      },
+      "date_of_birth": {
+        "month": 6,
+        "year": 1969
+      },
+      "occupation": "Officer 3 occupation",
+      "country_of_residence": "Officer 3 residence",
+      "nationality": "Officer 3 nationality"
+    }
+  ]
+}
