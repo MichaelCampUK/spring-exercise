@@ -1,5 +1,6 @@
 package com.michaelcamp.risknarrative.data;
 
+import com.michaelcamp.risknarrative.controller.validation.ValidCompanySearch;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ValidCompanySearch
 public class CompanySearchRequest {
     private String companyName;
     private String companyNumber;

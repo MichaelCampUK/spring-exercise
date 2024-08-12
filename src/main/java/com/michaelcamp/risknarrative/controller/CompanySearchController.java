@@ -21,10 +21,7 @@ public class CompanySearchController {
     @PostMapping(produces = "application/json")
     public CompanySearchResult findCompanies(@Valid @RequestBody CompanySearchRequest searchRequest,
                                              @RequestHeader("x-api-key") String apiKey,
-                                             @RequestParam boolean onlyActiveCompanies
-            /*@RequestBody CompanySearchRequest searchRequest,
-            @RequestHeader("x-api-key") String apiKey,
-            @RequestParam boolean onlyActiveCompanies*/) {
+                                             @RequestParam boolean onlyActiveCompanies) {
         logger.info("Finding companies with search {} and api {} and onlyActiveCompanies {}",
                 searchRequest, apiKey, onlyActiveCompanies);
         return companySearchService.findCompanies(searchRequest, apiKey, onlyActiveCompanies);

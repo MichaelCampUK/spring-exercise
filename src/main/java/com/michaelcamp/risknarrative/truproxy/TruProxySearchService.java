@@ -24,7 +24,7 @@ public class TruProxySearchService {
 
         logger.info("Fining companies in TruProxy with search {} and api {}", searchRequest, apiKey);
 
-        List<Company> companies = webClient.searchCompanies(searchRequest, apiKey);
+        List<Company> companies = findCompanies(searchRequest, apiKey);
 
         Predicate<Company> companyFilter = buildCompanyFilter(onlyActiveCompanies);
 
@@ -34,6 +34,11 @@ public class TruProxySearchService {
                 .toList();
 
         return CompanySearchResult.of(filteredCompanies);
+    }
+
+    private List<Company> findCompanies(CompanySearchRequest searchRequest, String apiKey) {
+        List<Company> companies = webClient.searchCompanies(searchRequest, apiKey);
+        return companies != null ? companies : Collections.emptyList();
     }
 
     private Predicate<Company> buildCompanyFilter(boolean onlyActiveCompanies) {

@@ -1,6 +1,7 @@
 package com.michaelcamp.risknarrative.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
@@ -50,6 +51,12 @@ public class CompanySearchControllerIntegrationTest {
         createStubResponse("/officers?CompanyNumber=SomeNumber1", "src/test/resources/officers_SomeNumber1.json");
         createStubResponse("/officers?CompanyNumber=SomeNumber2", "src/test/resources/officers_SomeNumber1.json");
         createStubResponse("/officers?CompanyNumber=SomeNumber3", "src/test/resources/officers_SomeNumber1.json");
+
+        // Company response empty - no companies found for search criteria
+        createStubResponse("/search?Query=UnknownCompanyName", "src/test/resources/company_Unknown.json");
+
+        // Company response invalid - no items
+        createStubResponse("/search?Query=InvalidCompanyName", "src/test/resources/company_Invalid.json");
 
         expectedOfficerOne = Officer.builder()
                 .name("Officer 1 name")
@@ -154,12 +161,16 @@ public class CompanySearchControllerIntegrationTest {
                 new HttpEntity<>(json, headers),
                 String.class).getBody();
 
-        System.out.println("body " + body);
-
         return body;
     }
 
     private String toJson(CompanySearchRequest sarchRequest) {
+
+        if (sarchRequest == null) {
+            // Allow testing invalid payload
+            return "{}";
+        }
+
         try {
             return mapper.writeValueAsString(sarchRequest);
         } catch (JsonProcessingException e) {
@@ -219,6 +230,46 @@ public class CompanySearchControllerIntegrationTest {
 
         checkCompany(expectedCompanyOne,
                 findCompanyByNumber(result.getItems(), "SomeNumber1"));
+    }
+
+    @Test
+    public void searchUsingCompanyName_UnknownCompany() throws JsonProcessingException {
+
+        String body = sendRequest(false,
+                CompanySearchRequest
+                        .builder()
+                        .companyName("UnknownCompanyName")
+                        .build());
+
+        CompanySearchResult result = mapper.readValue(body, CompanySearchResult.class);
+        assertThat(result.getTotal_results()).isEqualTo(0);
+        assertThat(result.getItems()).hasSize(0);
+    }
+
+    @Test
+    public void searchUsingCompanyName_InvalidItems() throws JsonProcessingException {
+
+        String body = sendRequest(false,
+                CompanySearchRequest
+                        .builder()
+                        .companyName("InvalidCompanyName")
+                        .build());
+
+        CompanySearchResult result = mapper.readValue(body, CompanySearchResult.class);
+        assertThat(result.getTotal_results()).isEqualTo(0);
+        assertThat(result.getItems()).hasSize(0);
+    }
+
+    @Test
+    public void searchRequestInvalid_ControllerValidates() throws JsonProcessingException {
+
+        String body = sendRequest(false, null);
+
+        ObjectMapper ignorableMapper = new ObjectMapper();
+        ignorableMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        CompanySearchResult result = ignorableMapper.readValue(body, CompanySearchResult.class);
+        assertThat(result.getTotal_results()).isEqualTo(0);
+        assertThat(result.getItems()).isNull();
     }
 
     private void checkCompany(Company expectedCompany, Company actualCompany) {

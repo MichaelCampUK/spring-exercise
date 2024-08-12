@@ -19,9 +19,9 @@ public class DbSearchService {
         return companyRepository.findById(companyNumber);
     }
 
-    public Company saveCompany(Company company) {
+    public void saveCompany(Company company) {
         logger.info("Saving company in DB {}", company);
-        return companyRepository.save(company);
+        companyRepository.save(company);
     }
 
 }
